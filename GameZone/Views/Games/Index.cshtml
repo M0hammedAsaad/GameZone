@@ -1,0 +1,45 @@
+﻿@using GameZone.Settings
+@model IEnumerable<Game>
+@{
+    ViewData["Title"] = "Games";
+}
+
+<a class="btn btn-info btn-lg" asp-action="Create">
+    <i class="bi bi-plus-circle-dotted"></i>
+    Add Game
+</a>
+<div class="mt-5">
+            <table class="table table-bordered border-primary">
+               <tbody>
+                   @foreach (var game in Model)
+                    {
+                    <tr class="border-1 border-success">
+                        <td>
+                            <div class="d-flex">
+                                <div class="pe-4">
+                                    <img src="@($"{FileSettings.ImagePath}/{game.Cover}")" alt="@game.Name" style="max-width:90px;" />
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h4 class="text-light">@game.Name</h4>
+                                    <h5>@game.Category.Name</h5>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-info rounded rounded-3 me-2" asp-action="Edit" asp-route-id="@game.Id">
+                                    <i class="bi bi-pencil-fill"></i>    
+                                </a>
+                            <a class="btn btn-danger rounded rounded-3" asp-route-id="@game.Id" asp-action="Delete" onclick="return confirm('Are you sure to Delete')" >
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+               </tbody>
+               
+            </table>
+</div>
+    
+

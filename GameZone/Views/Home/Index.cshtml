@@ -1,0 +1,33 @@
+﻿@using GameZone.Settings
+@model IEnumerable<Game>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row mt-5" >
+
+    @foreach (var game in Model)
+    {
+        <div class="col-lg-4 col-md-6">
+            <a class="card text-white bg-success mb-3 text-decoration-none rounded-3 overflow-hidden" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id"> 
+                <div class="card-body" style="background-image:url(@($"{FileSettings.ImagePath}/{game.Cover}")); 
+                    background-size:cover; background-position:center; height:500px;">
+                   <div class="h-100">
+                        <span class="badge rounded-pill bg-primary">@game.Category?.Name</span>
+                   </div>
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                    <h5>@game.Name</h5>
+                    <div>
+                        @foreach (var device in game.GameDevices)
+                        {
+                            <i class="@device.Device.Icon me-2 fs-4"></i>
+                        }
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
